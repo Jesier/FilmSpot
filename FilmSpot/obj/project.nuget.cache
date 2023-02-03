@@ -1,12 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "lx3j2j5AJfo/TilixByq2A/RiuAS8rO6OOYrYstMpxNvpB6Ibhl5hTVMgxfvIB1NZt7I3MzeUlEytICMSoN6rA==",
+  "dgSpecHash": "assouUAMayCMKjVC9ZpX8FXkCZrJMKE22867avwKs1Al7H5k7fkPBSEZcewPbnrbtS0GJIb0v9GoFUXhSagO5A==",
   "success": true,
   "projectFilePath": "C:\\Users\\jesie\\workspace\\csharp\\FilmSpot\\FilmSpot\\FilmSpot.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\jesie\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\jesie\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",
-    "C:\\Users\\jesie\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\5.0.5\\microsoft.aspnetcore.authentication.jwtbearer.5.0.5.nupkg.sha512",
+    "C:\\Users\\jesie\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\5.0.17\\microsoft.aspnetcore.authentication.jwtbearer.5.0.17.nupkg.sha512",
     "C:\\Users\\jesie\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\jesie\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
     "C:\\Users\\jesie\\.nuget\\packages\\microsoft.data.sqlclient\\5.1.0\\microsoft.data.sqlclient.5.1.0.nupkg.sha512",

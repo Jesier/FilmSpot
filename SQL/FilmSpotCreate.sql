@@ -14,7 +14,7 @@ CREATE TABLE [UserProfile] (
   [FirstName] nvarchar(50) NOT NULL,
   [LastName] nvarchar(50) NOT NULL,
   [Email] nvarchar(255) UNIQUE NOT NULL,
-  [IsAdmin] bit NOT NULL DEFAULT (1)
+  [IsAdmin] bit NOT NULL DEFAULT (0)
 )
 GO
 
