@@ -2,8 +2,7 @@ import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Login from "./Login";
 import Register from "./Register";
-import Hello from "./MovieList";
-
+import Hello from "./Movie/MovieList";
 
 
 export default function ApplicationViews({ isLoggedIn }) {
