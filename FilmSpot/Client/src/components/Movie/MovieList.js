@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { MovieCard } from "./MovieCard";
 
 export default function Hello() {
   const [movies, setMovies] = useState([])
@@ -20,7 +21,8 @@ const apiKey = "efd0ff32160fa99cfcda71cd93209624"
     <>
     <div className="MoviesContainer">
       {movies.map(movie => {
-        return movie.video
+        return <MovieCard movie={movie} key={movie.id} />
+        
       })}
     </div>
     </>
