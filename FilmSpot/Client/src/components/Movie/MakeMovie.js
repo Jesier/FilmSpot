@@ -1,21 +1,29 @@
-export const MakeMovie = (movie) => {
+import { useState } from "react"
+import { useNavigate } from "react-router-dom"
 
-    const apiKey = "efd0ff32160fa99cfcda71cd93209624"
+export const MakeMovie = () => {
+    const navigate = useNavigate
+    //inital state of a empty movie
+    const [newMovie, setNewMovie] = useState({
+        Title:"",
+        Info:"",
+        Image:"",
+        Trailer:"",
+        ReleaseDate:"",
+        GenreId:""
+    })
 
-  useEffect(() => {
-    //fetching the movies from the MovieDB
-    axios.get(`https://api.themoviedb.org/3/movie/top_rated?api_key=${apiKey}&language=en-US&page=1`)
-    .then(res => {
-      setMovies(res.data.results)
-      
-    }).catch(err => {console.log(err)}) 
-  },[])
+
 
      return<>
     <form>
   <div class="form-group">
-    <label for="exampleFormControlInput1">Email address</label>
-    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com"/>
+    <label for="title">Title</label>
+    <input type="title" class="form-control" value={newMovie.Title} placeholder="name@example.com" onChange={
+        (evt) => {const copy = {...newMovie}
+        copy.Title = evt.target.value
+        setNewMovie(copy)
+    }}/>
   </div>
   <div class="form-group">
     <label for="exampleFormControlSelect1">Example select</label>
