@@ -9,8 +9,8 @@ namespace FilmSpot.Models
         public string Info { get; set; }
         public string Image { get; set; }
         public string Trailer { get; set; }
-        public DateTime RealeaseDate { get; set; }
-        public Genre GenreId { get; set; }
+        public DateTime ReleaseDate { get; set; }
+        public int GenreId { get; set; }
         public bool UserCreated { get; set; }
     }
 }

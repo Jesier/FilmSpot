@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { MovieCard } from "./MovieCard";
 
-export default function Hello() {
+export default function MovieList() {
   const [movies, setMovies] = useState([])
 
 const apiKey = "efd0ff32160fa99cfcda71cd93209624"

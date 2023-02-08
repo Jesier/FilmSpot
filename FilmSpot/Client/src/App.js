@@ -5,7 +5,7 @@ import { onLoginStatusChange } from "./modules/authManager";
 import { Spinner } from "reactstrap";
 import { Navbar } from './Navbar/Navbar';
 
-function App() {
+export function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(null);
 
   useEffect(() => {
@@ -25,4 +25,3 @@ return <Spinner className="app-spinner dark" />;
   );
 }
 
-export default App;

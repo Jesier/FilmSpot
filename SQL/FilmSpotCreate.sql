@@ -24,7 +24,7 @@ CREATE TABLE [Movie] (
   [Info] nvarchar(555) NOT NULL,
   [Image] nvarchar(255) NOT NULL,
   [Trailer] nvarchar(255) NOT NULL,
-  [RealeaseDate] datetime NOT NULL,
+  [ReleaseDate] datetime NOT NULL,
   [GenreId] int NOT NULL,
   [Rating] int,
   [UserCreated] bit

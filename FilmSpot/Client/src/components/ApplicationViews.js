@@ -2,7 +2,8 @@ import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Login from "./Login";
 import Register from "./Register";
-import Hello from "./Movie/MovieList";
+import MovieList from "./Movie/MovieList";
+import { MakeMovie } from "./Movie/MakeMovie";
 
 
 export default function ApplicationViews({ isLoggedIn }) {
@@ -12,10 +13,11 @@ export default function ApplicationViews({ isLoggedIn }) {
         <Route path="/">
           <Route
             index
-            element={isLoggedIn ? <Hello /> : <Navigate to="/login" />}
+            element={isLoggedIn ? <MovieList /> : <Navigate to="/login" />}
           />
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
+          <Route path="MakeMovie" element={<MakeMovie />} />
           <Route path="*" element={<p>Whoops, nothing here...</p>} />
         </Route>
       </Routes>
