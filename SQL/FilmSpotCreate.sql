@@ -51,7 +51,7 @@ GO
 
 CREATE TABLE [Genre] (
   [Id] int PRIMARY KEY IDENTITY(1, 1),
-  [Genre] nvarchar(255) NOT NULL
+  [Name] nvarchar(255) NOT NULL
 )
 GO
 

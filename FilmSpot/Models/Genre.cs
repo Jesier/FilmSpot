@@ -4,6 +4,6 @@
     {
         public int Id { get; set; }
         //Table is named Genre oops
-        public string Genres { get; set; }
+        public string Name { get; set; }
     }
 }

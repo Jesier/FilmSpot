@@ -1,4 +1,5 @@
-﻿using FilmSpot.Repository;
+﻿using FilmSpot.Models;
+using FilmSpot.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -20,6 +21,13 @@ namespace FilmSpot.Controllers
         public IActionResult Get()
         {
             return Ok(_movieRepository.GetAll());
+        }
+
+        [HttpPost]
+        public IActionResult Post(Movie movie)
+        {
+            _movieRepository.AddMovie(movie);
+            return CreatedAtAction("Get", new { id = movie.Id }, movie);
         }
     }
 }

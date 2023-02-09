@@ -60,7 +60,7 @@ namespace FilmSpot.Repository
                     cmd.Parameters.AddWithValue("@info", movie.Info);
                     cmd.Parameters.AddWithValue("@image", movie.Image);
                     cmd.Parameters.AddWithValue("@trailer", movie.Trailer);
-                    cmd.Parameters.AddWithValue("@realeaseDate", movie.ReleaseDate);
+                    cmd.Parameters.AddWithValue("@releaseDate", movie.ReleaseDate);
                     cmd.Parameters.AddWithValue("@genreId", movie.GenreId);
                     cmd.Parameters.AddWithValue("@userCreated", true);
                     int id = (int)cmd.ExecuteScalar();
