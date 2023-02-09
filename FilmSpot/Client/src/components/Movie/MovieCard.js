@@ -12,7 +12,7 @@ export const MovieCard = ({movie}) => {
 
     return <div className="Cards">
         <Card style={{width:200}} >
-        <Card.Img src={imgPath + movie.poster_path} style={{width:"200px"}} onClick={() => {navigateToGameDetails(movie.id)}}/>
+        <Card.Img src={imgPath + movie.poster_path}  onClick={() => {navigateToGameDetails(movie.id)}}/>
         <Card.Title title={movie.title}  />
         </Card>
         
