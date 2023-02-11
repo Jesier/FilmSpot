@@ -4,6 +4,7 @@ import Login from "./Login";
 import Register from "./Register";
 import MovieList from "./Movie/MovieList";
 import { MakeMovie } from "./Movie/MakeMovie";
+import { MovieDetails } from "./Movie/MovieDetails";
 
 
 export default function ApplicationViews({ isLoggedIn }) {
@@ -17,6 +18,7 @@ export default function ApplicationViews({ isLoggedIn }) {
           />
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
+          <Route path=":movieId" element={<MovieDetails />} />
           <Route path="MakeMovie" element={<MakeMovie />} />
           <Route path="*" element={<p>Whoops, nothing here...</p>} />
         </Route>
