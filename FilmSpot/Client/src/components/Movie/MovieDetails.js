@@ -21,7 +21,7 @@ export const MovieDetails = () => {
       },[])
 
       const addFavoriteMovie = (movie) => {
-        const newFavoriteList = [...favorites, movie] ;
+        const newFavoriteList = [...favorites, movie];
         setFavorite(newFavoriteList);
       };
 
