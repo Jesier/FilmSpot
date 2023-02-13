@@ -6,17 +6,18 @@ export default function MovieList() {
   const [movies, setMovies] = useState([]);
   const [url, setUrl] = useState('https://api.themoviedb.org/3/movie/top_rated?api_key=efd0ff32160fa99cfcda71cd93209624&language=en-US&page=1');
   const [query, setQuery] = useState('');
-  const [page, setPage] = useState(1)
+  const [page, setPage] = useState(1);
+  const [favorite, setFavorite] = useState([])
 
   const apiKey = "efd0ff32160fa99cfcda71cd93209624"
 
-  const baseUrl = `https://api.themoviedb.org/3/movie/top_rated?api_key=${apiKey}&language=en-US&page=1`
+
 
   const searchMovie = (e) => {
-     e.preventDefault();
+     //e.preventDefault();
      const searchUrl = `https://api.themoviedb.org/3/search/movie?api_key=efd0ff32160fa99cfcda71cd93209624&language=en-US&query=${query}&page=1&include_adult=false`;
-     setUrl(searchUrl)
-     setQuery("")
+     setUrl(searchUrl);
+     //setQuery("");
   };
 
   const handlePageChange = (newPage) => {
@@ -45,7 +46,7 @@ export default function MovieList() {
           className="form-control"
           value={query}
           onChange={e => setQuery(e.target.value)}
-          onSubmit={searchMovie}
+          onKeyPress={searchMovie}
         />
       </div>
       </form>
