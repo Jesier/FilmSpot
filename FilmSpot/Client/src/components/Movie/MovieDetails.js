@@ -7,6 +7,7 @@ export const MovieDetails = () => {
     const {movieId} = useParams()
     const navigate = useNavigate()
     const apiKey = "efd0ff32160fa99cfcda71cd93209624"
+    
 
     useEffect(() => {
         //fetching the movies individual info from the MovieDB
