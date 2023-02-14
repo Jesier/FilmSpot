@@ -7,7 +7,7 @@ import { MakeMovie } from "./Movie/MakeMovie";
 import { MovieDetails } from "./Movie/MovieDetails";
 
 
-export default function ApplicationViews({ isLoggedIn }) {
+export default function ApplicationViews({ isLoggedIn}) {
   return (
     <main>
       <Routes>

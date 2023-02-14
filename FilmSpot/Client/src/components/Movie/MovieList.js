@@ -15,7 +15,6 @@ export default function MovieList() {
   const searchMovie = (e) => {
     const searchUrl = `https://api.themoviedb.org/3/search/movie?api_key=efd0ff32160fa99cfcda71cd93209624&language=en-US&query=${query}&page=1&include_adult=false`;
     setUrl(searchUrl);
-    //setQuery("");
   };
 
   const handlePageChange = (newPage) => {

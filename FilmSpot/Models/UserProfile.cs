@@ -1,4 +1,6 @@
-﻿namespace FilmSpot.Models
+﻿using System.Collections.Generic;
+
+namespace FilmSpot.Models
 {
     public class UserProfile
     {
@@ -8,6 +10,7 @@
         public string LastName { get; set; }
         public string Email { get; set; }
         public bool IsAdmin { get; set; }
+        
 
     }
 }

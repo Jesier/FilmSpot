@@ -1,28 +1,25 @@
-
+import { getToken } from "./authManager";
 
 const apiUrl = '/api/movie';
 
 export const getMovies = () => {
-    return fetch(apiUrl)
-    .then((res) => res.json())
+    return getToken().then((token) => 
+     fetch(`${apiUrl}`, {
+        method: "GET",
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+     }).then((res) => res.json()))
 };
 
-export const postMovie = (newMovie) => {
+export const postMovie = (token,newMovie) => {
     return fetch(`${apiUrl}`, {
         method: "POST",
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`
         },
         body:JSON.stringify(newMovie),
     })
         .then(res => res.json())
 }
-
-
-// export const getBikeById = (id) => {
-//     return fetch(`${apiUrl}/${id}`).then((res) => res.json())
-// }
-
-// export const getBikesInShopCount = () => {
-//     //add implementation here... 
-// }

@@ -17,7 +17,7 @@ export default function Register() {
   const registerClick = (e) => {
     e.preventDefault();
     if (password && password !== confirmPassword) {
-      alert("Passwords don't match. Do better.");
+      alert("Passwords don't match. Try again.");
     } else {
       const userProfile = {
         firstName,

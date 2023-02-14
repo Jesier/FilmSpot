@@ -8,7 +8,7 @@ namespace FilmSpot.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize]
+    [Authorize]
     public class MovieController : ControllerBase
     {
         private readonly IMovieRepository _movieRepository;
