@@ -2,13 +2,17 @@ import { useEffect, useState } from "react"
 import { useNavigate, useParams} from "react-router-dom"
 import axios from "axios"
 import { Favorite } from "./Favorite"
+import { me } from "../../modules/authManager"
 
 export const MovieDetails = () => {
     const [movie, setMovie] = useState({});
     const {movieId} = useParams();
     const [favorites, setFavorite] = useState([]);
+    const [userProfile, setUserProfile] = useState(null)
     const navigate = useNavigate();
     const apiKey = "efd0ff32160fa99cfcda71cd93209624";
+    
+    
 
     useEffect(() => {
         //fetching the movies individual info from the MovieDB
@@ -19,6 +23,8 @@ export const MovieDetails = () => {
           
         })
       },[])
+
+
 
       const addFavoriteMovie = (movie) => {
         const newFavoriteList = [...favorites, movie];

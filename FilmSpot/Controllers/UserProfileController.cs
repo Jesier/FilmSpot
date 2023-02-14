@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 using FilmSpot.Models;
 using FilmSpot.Repositories;
+using System;
 
 namespace FilmSpot.Controllers
 {
@@ -16,6 +18,25 @@ namespace FilmSpot.Controllers
             _userProfileRepository = userProfileRepository;
         }
 
+        private UserProfile GetCurrentUserProfile()
+        {
+            var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            return _userProfileRepository.GetByFirebaseUserId(firebaseUserId);
+        }
+
+        [HttpGet("Me")]
+        public IActionResult Me()
+        {
+            var userProfile = GetCurrentUserProfile();
+            if (userProfile == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(userProfile);
+            
+        }
+        
         [HttpGet("{firebaseUserId}")]
         public IActionResult GetByFirebaseUserId(string firebaseUserId)
         {

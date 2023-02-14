@@ -25,6 +25,7 @@ namespace FilmSpot
         {
             services.AddTransient<IUserProfileRepository, UserProfileRepository>();
             services.AddTransient<IMovieRepository, MovieRepository>();
+            services.AddTransient<IUserCatalogRepository, UserCatalogRepository>();
 
             var firebaseProjectId = Configuration.GetValue<string>("FirebaseProjectId");
             var googleTokenUrl = $"https://securetoken.google.com/{firebaseProjectId}";

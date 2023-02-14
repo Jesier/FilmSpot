@@ -1,4 +1,6 @@
-﻿namespace FilmSpot.Models
+﻿using System.Collections.Generic;
+
+namespace FilmSpot.Models
 {
     public class UserCatalog
     {
