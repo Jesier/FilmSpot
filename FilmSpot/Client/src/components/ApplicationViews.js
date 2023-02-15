@@ -22,7 +22,7 @@ export default function ApplicationViews({ isLoggedIn}) {
           <Route path="register" element={<Register />} />
           <Route path=":movieId" element={<MovieDetails />} />
           <Route path="MakeMovie" element={<MakeMovie />} />
-          <Route path="Your Movies" element={<UserMovies />} />
+          <Route path="YourMovies" element={<UserMovies />} />
           <Route path="Profile" element={<UserProfile />} />
           <Route path="*" element={<p>Whoops, nothing here...</p>} />
         </Route>

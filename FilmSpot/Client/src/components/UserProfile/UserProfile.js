@@ -1,16 +1,10 @@
 import { useEffect, useState } from "react";
 import { getUserFavorites } from "../../modules/userCatalogManager";
 import { Card } from "react-bootstrap";
-import axios from "axios";
 import { onLoginStatusChange,me } from "../../modules/authManager";
 
 export const UserProfile = () => {
 const [favorites, setFavorites] = useState([])
-const [movies, setMovies] = useState([]);
-const [isLoggedIn, setIsLoggedIn] = useState(null);
-
-
-
 
 
 useEffect(() => {

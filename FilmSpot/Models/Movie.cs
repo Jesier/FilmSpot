@@ -11,6 +11,7 @@ namespace FilmSpot.Models
         public string Trailer { get; set; }
         public DateTime ReleaseDate { get; set; }
         public int GenreId { get; set; }
+        public int UserProfileId { get; set; }
         public UserProfile UserProfile { get; set; }
     }
 }
