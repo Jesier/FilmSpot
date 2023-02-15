@@ -17,7 +17,7 @@ namespace FilmSpot.Repository
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = "SELECT Id, Title, Info, Poster, ReleaseDate, GenreId, UserCreated FROM Movie";
+                    cmd.CommandText = "SELECT Id, Title, Info, Poster, ReleaseDate, GenreId FROM Movie";
                     var reader = cmd.ExecuteReader();
 
                     var movies = new List<Movie>();
@@ -31,8 +31,7 @@ namespace FilmSpot.Repository
                             Info = reader.GetString(reader.GetOrdinal("Info")),
                             Image = reader.GetString(reader.GetOrdinal("Poster")),
                             ReleaseDate = reader.GetDateTime(reader.GetOrdinal("ReleaseDate")),
-                            GenreId = reader.GetInt32(reader.GetOrdinal("GenreId")),
-                            UserCreated = reader.GetBoolean(reader.GetOrdinal("UserCreated"))
+                            GenreId = reader.GetInt32(reader.GetOrdinal("GenreId"))
                         });
                     }
 
@@ -43,7 +42,7 @@ namespace FilmSpot.Repository
             }
         }
 
-        public List<Movie> GetUserMoviesl()
+        public List<Movie> GetUserMovies(int id)
         {
             using (var conn = Connection)
             {
@@ -53,10 +52,10 @@ namespace FilmSpot.Repository
                     cmd.CommandText = @"SELECT M.Id, M.Title, M.Info, M.Poster, M.ReleaseDate, M.GenreId, M.UserProfileId,
                                         up.Id as UserId
                                         FROM Movie M 
-                                        join UserProfile up on M.UserProfile = up.Id
-                                        ";
+                                        join UserProfile up ON M.UserProfileId = up.Id
+                                        Where up.Id = @id";
 
-                    
+                    cmd.Parameters.AddWithValue("@id", id);
 
                     var reader = cmd.ExecuteReader();
 
@@ -72,6 +71,7 @@ namespace FilmSpot.Repository
                             Image = reader.GetString(reader.GetOrdinal("Poster")),
                             ReleaseDate = reader.GetDateTime(reader.GetOrdinal("ReleaseDate")),
                             GenreId = reader.GetInt32(reader.GetOrdinal("GenreId")),
+                            UserProfileId = reader.GetInt32(reader.GetOrdinal("UserProfileId")),
                             UserProfile = new UserProfile()
                             {
                                 Id = reader.GetInt32(reader.GetOrdinal("UserId"))

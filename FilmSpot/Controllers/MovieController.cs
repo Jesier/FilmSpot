@@ -1,8 +1,10 @@
 ﻿using FilmSpot.Models;
+using FilmSpot.Repositories;
 using FilmSpot.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace FilmSpot.Controllers
 {
@@ -12,15 +14,31 @@ namespace FilmSpot.Controllers
     public class MovieController : ControllerBase
     {
         private readonly IMovieRepository _movieRepository;
-        public MovieController(IMovieRepository movieRepository) 
+        private readonly IUserProfileRepository _userProfileRepository;
+        public MovieController(IMovieRepository movieRepository,
+            IUserProfileRepository userProfileRepository)
         {
             _movieRepository = movieRepository;
+            _userProfileRepository = userProfileRepository;
+        }
+
+        private UserProfile GetCurrentUserProfile()
+        {
+            var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            return _userProfileRepository.GetByFirebaseUserId(firebaseUserId);
         }
 
         [HttpGet]
         public IActionResult Get()
         {
             return Ok(_movieRepository.GetAll());
+        }
+
+        [HttpGet("UserMovies")]
+        public IActionResult GetById()
+        {
+            var user = GetCurrentUserProfile();
+            return Ok(_movieRepository.GetUserMovies(user.Id));
         }
 
         [HttpPost]
