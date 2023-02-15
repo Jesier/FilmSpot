@@ -43,6 +43,49 @@ namespace FilmSpot.Repository
             }
         }
 
+        public List<Movie> GetUserMoviesl()
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"SELECT M.Id, M.Title, M.Info, M.Poster, M.ReleaseDate, M.GenreId, M.UserProfileId,
+                                        up.Id as UserId
+                                        FROM Movie M 
+                                        join UserProfile up on M.UserProfile = up.Id
+                                        ";
+
+                    
+
+                    var reader = cmd.ExecuteReader();
+
+                    var movies = new List<Movie>();
+
+                    while (reader.Read())
+                    {
+                        movies.Add(new Movie()
+                        {
+                            Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                            Title = reader.GetString(reader.GetOrdinal("Title")),
+                            Info = reader.GetString(reader.GetOrdinal("Info")),
+                            Image = reader.GetString(reader.GetOrdinal("Poster")),
+                            ReleaseDate = reader.GetDateTime(reader.GetOrdinal("ReleaseDate")),
+                            GenreId = reader.GetInt32(reader.GetOrdinal("GenreId")),
+                            UserProfile = new UserProfile()
+                            {
+                                Id = reader.GetInt32(reader.GetOrdinal("UserId"))
+                            }
+                        });
+                    }
+
+                    reader.Close();
+
+                    return movies;
+                }
+            }
+        }
+
         public void AddMovie(Movie movie)
         {
             using (SqlConnection conn = Connection)

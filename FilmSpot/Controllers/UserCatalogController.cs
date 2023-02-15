@@ -23,10 +23,18 @@ namespace FilmSpot.Controllers
             _userProfileRepository = userProfileRepository;
         }
 
-        [HttpGet]
+        private UserProfile GetCurrentUserProfile()
+        {
+            var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            return _userProfileRepository.GetByFirebaseUserId(firebaseUserId);
+        }
+
+        [HttpGet()]
         public IActionResult Get()
         {
-            return Ok(_userCatalogRepository.GetUsersFavorites());
+
+            var user = GetCurrentUserProfile();
+            return Ok(_userCatalogRepository.GetUsersFavorites(user.Id));
         }
 
         [HttpPost]

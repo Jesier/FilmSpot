@@ -16,7 +16,10 @@ export const Navbar = () => {
         <a className="nav-link" href="MakeMovie">StoreMovie</a>
       </li>
       <li className="nav-item">
-        <a className="nav-link" href="#">Profile</a>
+        <a className="nav-link" href="YourMovies">YourMovies</a>
+      </li>
+      <li className="nav-item">
+        <a className="nav-link" href="Profile">Profile</a>
       </li>
       <li className="nav-item">
                   <a  className="nav-link" onClick={logout}>Logout</a>

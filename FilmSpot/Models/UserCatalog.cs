@@ -11,5 +11,6 @@ namespace FilmSpot.Models
         public string MoviePoster { get; set; }
         public bool Favorite { get; set; }
         public bool Later { get; set; }
+        public UserProfile UserProfile { get; set; }
     }
 }

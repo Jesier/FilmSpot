@@ -6,13 +6,13 @@ export const MovieCard = ({movie}) => {
     const imgPath = "https://image.tmdb.org/t/p/w500";
     const navigate = useNavigate()
 
-    const navigateToGameDetails = (movieId) => {
+    const navigateToMovieDetails = (movieId) => {
         navigate(`/${movieId}`)
     }
 
     return <div className="Cards">
         <Card style={{width:200}} >
-        <Card.Img src={imgPath + movie.poster_path}  onClick={() => {navigateToGameDetails(movie.id)}}/>
+        <Card.Img src={imgPath + movie.poster_path}  onClick={() => {navigateToMovieDetails(movie.id)}}/>
         <Card.Title title={movie.title}  />
         </Card>
         

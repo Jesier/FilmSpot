@@ -9,7 +9,6 @@ export const MovieDetails = () => {
     const [movie, setMovie] = useState({});
     const {movieId} = useParams();
     
-
    const favorite = {
     movieId: movie.id,
     moviePoster: movie.poster_path,
@@ -21,8 +20,6 @@ export const MovieDetails = () => {
 
     const apiKey = "efd0ff32160fa99cfcda71cd93209624";
     
-    
-
     useEffect(() => {
         //fetching the movies individual info from the MovieDB
         axios.get(`

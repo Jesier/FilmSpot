@@ -1,5 +1,6 @@
 import { getToken } from "./authManager";
 
+
 const apiUrl =`/api/UserCatalog`;
 export const getUserFavorites = () => {
     return getToken().then((token) => 

@@ -10,7 +10,7 @@ namespace FilmSpot.Repository
     {
         public UserCatalogRepository(IConfiguration config) : base(config) { }
 
-        public List<UserCatalog> GetUsersFavorites()
+        public List<UserCatalog> GetUsersFavorites(int id)
         {
             using (var conn = Connection)
             {
@@ -22,8 +22,10 @@ namespace FilmSpot.Repository
 
                                         FROM UserCatalog C
                                         JOIN UserProfile up ON C.UserProfileId = up.Id
-                                        WHERE UserId = C.Id";
-                                        
+                                        Where up.Id = @id";
+
+                    cmd.Parameters.AddWithValue("@id", id);
+
 
                     var reader = cmd.ExecuteReader();
 
@@ -38,9 +40,11 @@ namespace FilmSpot.Repository
                             MovieId = reader.GetInt32(reader.GetOrdinal("MovieId")),
                             MoviePoster = reader.GetString(reader.GetOrdinal("MoviePoster")),
                             MovieTitle = reader.GetString(reader.GetOrdinal("MovieTitle")),
-                            Favorite = reader.GetBoolean(reader.GetOrdinal("MovieTitle"))
-
-
+                            Favorite = reader.GetBoolean(reader.GetOrdinal("Favorite")),
+                            UserProfile = new UserProfile()
+                            {
+                                Id = reader.GetInt32(reader.GetOrdinal("UserId"))
+                            }
                         });
 
 
@@ -62,13 +66,13 @@ namespace FilmSpot.Repository
                     cmd.CommandText = @"
                     INSERT INTO UserCatalog (UserProfileId, MovieId, MovieTitle, Favorite, MoviePoster)
                     OUTPUT INSERTED.ID
-                    VALUES (@userProfileId, @movieId, @favorite, @movieTitle, @moviePoster);
+                    VALUES (@userProfileId, @movieId, @movieTitle, @favorite, @moviePoster);
                 ";
 
 
                     cmd.Parameters.AddWithValue("@userProfileId", userCatalog.UserProfileId);
                     cmd.Parameters.AddWithValue("@movieId", userCatalog.MovieId);
-                    cmd.Parameters.AddWithValue("@MovieTitle", userCatalog.MovieId);
+                    cmd.Parameters.AddWithValue("@movieTitle", userCatalog.MovieTitle);
                     cmd.Parameters.AddWithValue("@moviePoster", userCatalog.MoviePoster);
                     cmd.Parameters.AddWithValue("@favorite", userCatalog.Favorite);
                     int id = (int)cmd.ExecuteScalar();
