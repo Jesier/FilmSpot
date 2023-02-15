@@ -35,7 +35,7 @@ export const me = () => {
     }).then((resp) => resp.json()),
   );
 };
-console.log()
+
 export const getToken = () => firebase.auth().currentUser.getIdToken();
 
 

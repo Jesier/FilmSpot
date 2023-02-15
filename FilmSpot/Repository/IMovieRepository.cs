@@ -9,5 +9,6 @@ namespace FilmSpot.Repository
         void DeleteMovie(int id);
         List<Movie> GetAll();
         void UpdateMovie(Movie movie);
+        public List<Movie> GetUserMoviesl();
     }
 }

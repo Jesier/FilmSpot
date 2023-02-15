@@ -7,7 +7,7 @@ INSERT INTO "UserProfile" ("Id","FirebaseUserId","Email","FirstName","LastName",
 set identity_insert [UserProfile] off;
 
 set identity_insert [Genre] on;
-insert into "Genre" ("Id", "Name") Values ('28', 'Action'),
+insert into "Genre" ("Id", "Genre") Values ('28', 'Action'),
 ('12', 'Adventure'),
 ('16', 'Animation'),
 ('35', 'Comedy'),
@@ -27,3 +27,10 @@ insert into "Genre" ("Id", "Name") Values ('28', 'Action'),
 ('10752', 'War'),
 ('37', 'Western');
 set identity_insert [Genre] off ;
+
+set identity_insert [Movie] on;
+insert into "Movie" ("Id", "Title", "Info", "Poster", "ReleaseDate","GenreId","UserProfileId") Values ('772071','Cuando Sea Joven','70-year-old Malena gets a second chance at life when she magically turns into her 22-year-old self.',
+'/6gIJuFHh5Lj4dNaPG3TzIMl7L68.jpg','2022-09-14','35','1'),
+('238','The Godfather','Spanning the years 1945 to 1955, a chronicle of the fictional Italian-American Corleone crime family.','/3bhkrj58Vtu7enYsRolD1fZdja1.jpg','1972-03-14','80','2')
+set identity_insert [Movie] off ;
+

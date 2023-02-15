@@ -23,10 +23,18 @@ namespace FilmSpot.Controllers
             _userProfileRepository = userProfileRepository;
         }
 
-        [HttpGet]
+        private UserProfile GetCurrentUserProfile()
+        {
+            var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            return _userProfileRepository.GetByFirebaseUserId(firebaseUserId);
+        }
+
+        [HttpGet()]
         public IActionResult Get()
         {
-            return Ok(_userCatalogRepository.GetUsersFavorites());
+
+            var user = GetCurrentUserProfile();
+            return Ok(_userCatalogRepository.GetUsersFavorites(user.Id));
         }
 
         [HttpPost]
@@ -38,6 +46,13 @@ namespace FilmSpot.Controllers
             favorite.UserProfileId = userProfile.Id;
             _userCatalogRepository.AddFavorite(favorite);
             return CreatedAtAction(nameof(Get), new { id = favorite.Id }, favorite);
+        }
+
+        [HttpDelete]
+        public IActionResult Delete(int id)
+        {
+            _userCatalogRepository.DeleteFavorite(id);
+            return NoContent();
         }
 
 
