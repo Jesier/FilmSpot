@@ -40,6 +40,13 @@ namespace FilmSpot.Controllers
             return CreatedAtAction(nameof(Get), new { id = favorite.Id }, favorite);
         }
 
+        [HttpDelete]
+        public IActionResult Delete(int id)
+        {
+            _userCatalogRepository.DeleteFavorite(id);
+            return NoContent();
+        }
+
 
     }
 }

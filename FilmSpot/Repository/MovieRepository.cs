@@ -17,7 +17,7 @@ namespace FilmSpot.Repository
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = "SELECT Id, Title, Info, Image, ReleaseDate, GenreId, UserCreated FROM Movie";
+                    cmd.CommandText = "SELECT Id, Title, Info, Poster, ReleaseDate, GenreId, UserCreated FROM Movie";
                     var reader = cmd.ExecuteReader();
 
                     var movies = new List<Movie>();
@@ -28,7 +28,8 @@ namespace FilmSpot.Repository
                         {
                             Id = reader.GetInt32(reader.GetOrdinal("Id")),
                             Title = reader.GetString(reader.GetOrdinal("Title")),
-                            Image = reader.GetString(reader.GetOrdinal("Image")),
+                            Info = reader.GetString(reader.GetOrdinal("Info")),
+                            Image = reader.GetString(reader.GetOrdinal("Poster")),
                             ReleaseDate = reader.GetDateTime(reader.GetOrdinal("ReleaseDate")),
                             GenreId = reader.GetInt32(reader.GetOrdinal("GenreId")),
                             UserCreated = reader.GetBoolean(reader.GetOrdinal("UserCreated"))

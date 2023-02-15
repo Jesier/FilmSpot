@@ -3,13 +3,21 @@ import { useNavigate, useParams} from "react-router-dom"
 import axios from "axios"
 import { Favorite } from "./Favorite"
 import { me } from "../../modules/authManager"
+import { postUserFavorite } from "../../modules/userCatalogManager"
 
 export const MovieDetails = () => {
     const [movie, setMovie] = useState({});
     const {movieId} = useParams();
-    const [favorites, setFavorite] = useState([]);
-    const [userProfile, setUserProfile] = useState(null)
-    const navigate = useNavigate();
+    
+
+   const favorite = {
+    movieId: movie.id,
+    moviePoster: movie.poster_path,
+    movieTitle:movie.title,
+    Favorite: true
+    
+   }
+
     const apiKey = "efd0ff32160fa99cfcda71cd93209624";
     
     
@@ -24,21 +32,18 @@ export const MovieDetails = () => {
         })
       },[])
 
+      const handleFavoriteClick = (event) => {
+        event.preventDefault()
+        postUserFavorite(favorite)
 
-
-      const addFavoriteMovie = (movie) => {
-        const newFavoriteList = [...favorites, movie];
-        setFavorite(newFavoriteList);
-      };
-
-       console.log(favorites) 
+    }
 
       return <>
       <div>
         {movie.title}
         {movie.release_date}
         {movie.overview}
-        <button onClick={() => addFavoriteMovie(movie)}>
+        <button onClick={(clickEvent) => handleFavoriteClick(clickEvent)}>
         <Favorite/>
         </button>
       </div>

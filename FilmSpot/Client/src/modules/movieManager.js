@@ -12,8 +12,9 @@ export const getMovies = () => {
      }).then((res) => res.json()))
 };
 
-export const postMovie = (token,newMovie) => {
-    return fetch(`${apiUrl}`, {
+export const postMovie = (newMovie) => {
+    return getToken().then((token) => 
+    fetch(`${apiUrl}`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -21,5 +22,5 @@ export const postMovie = (token,newMovie) => {
         },
         body:JSON.stringify(newMovie),
     })
-        .then(res => res.json())
+        .then(res => res.json()))
 }

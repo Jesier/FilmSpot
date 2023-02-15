@@ -7,5 +7,6 @@ namespace FilmSpot.Repository
     {
         void AddFavorite(UserCatalog userCatalog);
         List<UserCatalog> GetUsersFavorites();
+        void DeleteFavorite(int id);
     }
 }

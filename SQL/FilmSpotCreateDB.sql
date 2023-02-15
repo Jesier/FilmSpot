@@ -7,25 +7,24 @@ GO
 USE [FilmSpot]
 GO
 
-
 CREATE TABLE [UserProfile] (
   [Id] int PRIMARY KEY IDENTITY(1, 1),
-  [FirebaseUserId] nvarchar(28) UNIQUE NOT NULL,
-  [FirstName] nvarchar(50) NOT NULL,
-  [LastName] nvarchar(50) NOT NULL,
+  [FirebaseUserId] nvarchar(255) UNIQUE NOT NULL,
+  [FirstName] nvarchar(255) NOT NULL,
+  [LastName] nvarchar(255) NOT NULL,
   [Email] nvarchar(255) UNIQUE NOT NULL,
-  [IsAdmin] bit NOT NULL DEFAULT (0)
+  [IsAdmin] bit NOT NULL DEFAULT (1)
 )
 GO
 
 CREATE TABLE [Movie] (
   [Id] int PRIMARY KEY IDENTITY(1, 1),
   [Title] nvarchar(255) NOT NULL,
-  [Info] nvarchar(555) NOT NULL,
-  [Image] nvarchar(255) NOT NULL,
-  [Trailer] nvarchar(255) NOT NULL,
-  [ReleaseDate] datetime NOT NULL,
-  [GenreId] int NOT NULL,
+  [Info] nvarchar(255),
+  [Poster] nvarchar(255) NOT NULL,
+  [Trailer] nvarchar(255),
+  [ReleaseDate] datetime,
+  [GenreId] int,
   [Rating] int,
   [UserCreated] bit
 )
@@ -33,7 +32,7 @@ GO
 
 CREATE TABLE [Review] (
   [Id] int PRIMARY KEY IDENTITY(1, 1),
-  [Text] nvarchar(3000) NOT NULL,
+  [Text] nvarchar(255) NOT NULL,
   [UserProfileId] int NOT NULL,
   [MovieId] int NOT NULL,
   [PersonalRating] int
@@ -44,14 +43,16 @@ CREATE TABLE [UserCatalog] (
   [Id] int PRIMARY KEY IDENTITY(1, 1),
   [UserProfileId] int NOT NULL,
   [MovieId] int NOT NULL,
+  [MovieTitle] nvarchar(255),
+  [MoviePoster] nvarchar(255),
   [Favorite] bit,
-  [Later] bit
+  [WatchLater] bit
 )
 GO
 
 CREATE TABLE [Genre] (
   [Id] int PRIMARY KEY IDENTITY(1, 1),
-  [Name] nvarchar(255) NOT NULL
+  [Genre] nvarchar(255) NOT NULL
 )
 GO
 

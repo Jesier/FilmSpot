@@ -17,7 +17,7 @@ namespace FilmSpot.Repository
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = "Select Id, UserProfileId, MovieId, Favorite FROM UserCatalog";
+                    cmd.CommandText = "Select Id, UserProfileId, MovieId, MovieTitle, MoviePoster, Favorite FROM UserCatalog";
 
                     var reader = cmd.ExecuteReader();
 
@@ -30,7 +30,10 @@ namespace FilmSpot.Repository
                             Id = reader.GetInt32(reader.GetOrdinal("Id")),
                             UserProfileId = reader.GetInt32(reader.GetOrdinal("UserProfileId")),
                             MovieId = reader.GetInt32(reader.GetOrdinal("MovieId")),
-                            Favorite = reader.GetBoolean(reader.GetOrdinal("Favorite"))
+                            MoviePoster = reader.GetString(reader.GetOrdinal("MoviePoster")),
+                            MovieTitle = reader.GetString(reader.GetOrdinal("MovieTitle")),
+                            Favorite = reader.GetBoolean(reader.GetOrdinal("MovieTitle"))
+
 
                         });
 
@@ -51,19 +54,40 @@ namespace FilmSpot.Repository
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                    INSERT INTO UserCatalog (UserProfileId, MovieId, Favorite, Later)
+                    INSERT INTO UserCatalog (UserProfileId, MovieId, MovieTitle, Favorite, MoviePoster)
                     OUTPUT INSERTED.ID
-                    VALUES (@userProfileId, @movieId, @favorite, @later);
+                    VALUES (@userProfileId, @movieId, @favorite, @movieTitle, @moviePoster);
                 ";
 
 
                     cmd.Parameters.AddWithValue("@userProfileId", userCatalog.UserProfileId);
                     cmd.Parameters.AddWithValue("@movieId", userCatalog.MovieId);
-                    cmd.Parameters.AddWithValue("@favorite", true);
-                    cmd.Parameters.AddWithValue("@later", false);
+                    cmd.Parameters.AddWithValue("@MovieTitle", userCatalog.MovieId);
+                    cmd.Parameters.AddWithValue("@moviePoster", userCatalog.MoviePoster);
+                    cmd.Parameters.AddWithValue("@favorite", userCatalog.Favorite);
                     int id = (int)cmd.ExecuteScalar();
 
                     userCatalog.Id = id;
+                }
+            }
+        }
+
+        public void DeleteFavorite(int id)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                            DELETE FROM UserCatalog
+                            WHERE Id = @id
+                        ";
+
+                    cmd.Parameters.AddWithValue("@id", id);
+
+                    cmd.ExecuteNonQuery();
                 }
             }
         }

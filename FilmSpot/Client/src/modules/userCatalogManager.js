@@ -11,14 +11,28 @@ export const getUserFavorites = () => {
     }).then((res) => res.json()))
 }
 
-export const postUserFavorite = (token, Movie) => {
-    return fetch(`${apiUrl}`, {
+
+
+export const postUserFavorite = (Movie) => {
+    return getToken().then((token) => {
+      return fetch(apiUrl, {
         method: "POST",
         headers: {
-            "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
         },
-        body:JSON.stringify(Movie),
-    })
-        .then(res => res.json())
-}
+        body: JSON.stringify(Movie),
+      }).then((resp) => {
+        if (resp.ok) {
+          return resp.json();
+        } else if (resp.status === 401) {
+          throw new Error("Unauthorized");
+        } else {
+          throw new Error(
+            "An unknown error occurred while trying to save a new quote.",
+          );
+        }
+      });
+    });
+  };
+  
