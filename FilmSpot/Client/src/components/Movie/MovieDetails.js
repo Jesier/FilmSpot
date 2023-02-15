@@ -14,7 +14,8 @@ export const MovieDetails = () => {
     movieId: movie.id,
     moviePoster: movie.poster_path,
     movieTitle:movie.title,
-    Favorite: true
+    Favorite: true,
+    Later: false
     
    }
 

@@ -17,7 +17,13 @@ namespace FilmSpot.Repository
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = "Select Id, UserProfileId, MovieId, MovieTitle, MoviePoster, Favorite FROM UserCatalog";
+                    cmd.CommandText = @"Select C.Id, C.UserProfileId, C.MovieId, C.MovieTitle, C.MoviePoster, C.Favorite,
+                                        up.Id as UserId                                        
+
+                                        FROM UserCatalog C
+                                        JOIN UserProfile up ON C.UserProfileId = up.Id
+                                        WHERE UserId = C.Id";
+                                        
 
                     var reader = cmd.ExecuteReader();
 
