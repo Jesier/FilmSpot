@@ -1,5 +1,6 @@
 ﻿using FilmSpot.Models;
 using FilmSpot.Repositories;
+using FilmSpot.Utils;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
@@ -29,7 +30,7 @@ namespace FilmSpot.Repository
                             Id = reader.GetInt32(reader.GetOrdinal("Id")),
                             Title = reader.GetString(reader.GetOrdinal("Title")),
                             Info = reader.GetString(reader.GetOrdinal("Info")),
-                            Image = reader.GetString(reader.GetOrdinal("Poster")),
+                            Poster = reader.GetString(reader.GetOrdinal("Poster")),
                             ReleaseDate = reader.GetDateTime(reader.GetOrdinal("ReleaseDate")),
                             GenreId = reader.GetInt32(reader.GetOrdinal("GenreId"))
                         });
@@ -68,7 +69,7 @@ namespace FilmSpot.Repository
                             Id = reader.GetInt32(reader.GetOrdinal("Id")),
                             Title = reader.GetString(reader.GetOrdinal("Title")),
                             Info = reader.GetString(reader.GetOrdinal("Info")),
-                            Image = reader.GetString(reader.GetOrdinal("Poster")),
+                            Poster = reader.GetString(reader.GetOrdinal("Poster")),
                             ReleaseDate = reader.GetDateTime(reader.GetOrdinal("ReleaseDate")),
                             GenreId = reader.GetInt32(reader.GetOrdinal("GenreId")),
                             UserProfileId = reader.GetInt32(reader.GetOrdinal("UserProfileId")),
@@ -84,6 +85,8 @@ namespace FilmSpot.Repository
                     return movies;
                 }
             }
+
+           
         }
 
         public void AddMovie(Movie movie)
@@ -94,22 +97,66 @@ namespace FilmSpot.Repository
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                    INSERT INTO Movie ([Title], Info, Image, Trailer, ReleaseDate, GenreId, UserCreated)
+                    INSERT INTO Movie ([Title], Info, Poster, Trailer, ReleaseDate, GenreId, UserProfileId)
                     OUTPUT INSERTED.ID
-                    VALUES (@title, @info, @image, @trailer, @releaseDate, @genreId, @userCreated);
+                    VALUES (@title, @info, @poster, @trailer, @releaseDate, @genreId, @userProfileId);
                 ";
 
 
                     cmd.Parameters.AddWithValue("@title", movie.Title);
                     cmd.Parameters.AddWithValue("@info", movie.Info);
-                    cmd.Parameters.AddWithValue("@image", movie.Image);
+                    cmd.Parameters.AddWithValue("@poster", movie.Poster);
                     cmd.Parameters.AddWithValue("@trailer", movie.Trailer);
                     cmd.Parameters.AddWithValue("@releaseDate", movie.ReleaseDate);
                     cmd.Parameters.AddWithValue("@genreId", movie.GenreId);
-                    cmd.Parameters.AddWithValue("@userCreated", true);
+                    cmd.Parameters.AddWithValue("@userProfileId", movie.UserProfileId);
                     int id = (int)cmd.ExecuteScalar();
 
                     movie.Id = id;
+                }
+            }
+        }
+
+        public Movie GetUserMovie(int id)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"Select M.Id, M.Title, M.Info, M.Poster, M.ReleaseDate, M.GenreId, M.UserProfileId,
+                                        up.Id as UserId                                        
+
+                                        FROM Movie M
+                                        JOIN UserProfile up ON M.UserProfileId = up.Id
+                                        Where M.Id = @id";
+
+                    cmd.Parameters.AddWithValue("@id", id);
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+
+                        Movie movie = null;
+                        if (reader.Read())
+                        {
+                            movie = new Movie()
+                            {
+                                Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                                Title = reader.GetString(reader.GetOrdinal("Title")),
+                                Info = reader.GetString(reader.GetOrdinal("Info")),
+                                Poster = reader.GetString(reader.GetOrdinal("Poster")),
+                                ReleaseDate = reader.GetDateTime(reader.GetOrdinal("ReleaseDate")),
+                                GenreId = reader.GetInt32(reader.GetOrdinal("GenreId")),
+                                UserProfileId = reader.GetInt32(reader.GetOrdinal("UserProfileId")),
+                                UserProfile = new UserProfile()
+                                {
+                                    Id = reader.GetInt32(reader.GetOrdinal("UserId"))
+                                }
+                            };
+                        }
+
+                        return movie;
+                    }
                 }
             }
         }
@@ -127,20 +174,20 @@ namespace FilmSpot.Repository
                             SET 
                                 [Title] = @title,
                                 Info = @info,
-                                Image = @image,
-                                Trailer = @trailer
-                                ReleaseDate = @releaseDate
+                                Poster = @poster,
+                                Trailer = @trailer,
+                                ReleaseDate = @releaseDate,
                                 GenreId = @genreId
                                 
                             WHERE Id = @id";
 
                     cmd.Parameters.AddWithValue("@title", movie.Title);
                     cmd.Parameters.AddWithValue("@info", movie.Info);
-                    cmd.Parameters.AddWithValue("@image", movie.Image);
+                    cmd.Parameters.AddWithValue("@poster", movie.Poster);
                     cmd.Parameters.AddWithValue("@trailer", movie.Trailer);
-                    cmd.Parameters.AddWithValue("@realeaseDate", movie.ReleaseDate);
+                    cmd.Parameters.AddWithValue("@releaseDate", movie.ReleaseDate);
                     cmd.Parameters.AddWithValue("@genreId", movie.GenreId);
-
+                    cmd.Parameters.AddWithValue("@id", movie.Id);
 
                     cmd.ExecuteNonQuery();
                 }

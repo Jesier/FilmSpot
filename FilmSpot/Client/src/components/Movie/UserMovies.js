@@ -1,29 +1,42 @@
 import { useEffect, useState } from "react"
 import { getUserMovies } from "../../modules/movieManager"
 import { Card } from "react-bootstrap"
-
+import { useNavigate } from "react-router-dom"
 export const UserMovies = () => {
-const [userMovies, setUserMovies] = useState([])
+    const [userMovies, setUserMovies] = useState([])
+    
+    const imgPath = "https://image.tmdb.org/t/p/w500";
+    const navigate = useNavigate()
 
-const imgPath = "https://image.tmdb.org/t/p/w500";
+    useEffect(() => {
+        getUserMovies()
+            .then((data) => {
+                setUserMovies(data)
+            })
+    }, [])
 
-useEffect(() => {
-    getUserMovies()
-    .then((data) => {
-        setUserMovies(data)
-    })
-}, [])
+    const navigateToMovieDetails = (movieId) => {
+        navigate(`/${movieId}`)
+    }
 
-return (
-    <>
-    <div className="Cards">
-        {userMovies.map((userMovie) => {
-            return <Card style={{width:200}}>
-    <Card.Img src={imgPath + userMovie.image}  onClick={() => {}}/>
-    <Card.Title title={userMovie.title}  />
-            </Card>
-        })}
-    </div>
-    </>
-        )
+    const navigateToMovieEdit = (movieId) => {
+        navigate(`/${movieId}/edit`)
+    }
+
+    return (
+        <>
+            <div className="Cards">
+                {userMovies.map((userMovie) => {
+                    return <Card style={{ width: 200 }} key={userMovie.id}>
+                        <Card.Img src={imgPath + userMovie.poster} onClick={() => { navigateToMovieDetails(userMovie.id) }} />
+                        <Card.Title title={userMovie.title} />
+                        <button onClick={() => {navigateToMovieEdit(userMovie.id)}}>
+                            Edit
+                        </button>
+                    </Card>
+                    
+                })}
+            </div>
+        </>
+    )
 }

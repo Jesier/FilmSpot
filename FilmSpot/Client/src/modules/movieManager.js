@@ -22,6 +22,16 @@ export const getUserMovies = () => {
      }).then((res) => res.json()))
 };
 
+export const getUserMovie = () => {
+    return getToken().then((token) => 
+     fetch(`${apiUrl}/UserMovie`, {
+        method: "GET",
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+     }).then((res) => res.json()))
+};
+
 export const postMovie = (newMovie) => {
     return getToken().then((token) => 
     fetch(`${apiUrl}`, {
@@ -31,6 +41,21 @@ export const postMovie = (newMovie) => {
         Authorization: `Bearer ${token}`
         },
         body:JSON.stringify(newMovie),
+    })
+        .then(res => res.json()))
+
+        
+}
+
+export const editMovie = (movie) => {
+    return getToken().then((token) => 
+    fetch(`${apiUrl}/${movie.id}/edit`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`
+        },
+        body:JSON.stringify(movie),
     })
         .then(res => res.json()))
 }

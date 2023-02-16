@@ -7,6 +7,7 @@ import { MakeMovie } from "./Movie/MakeMovie";
 import { MovieDetails } from "./Movie/MovieDetails";
 import { UserProfile } from "./UserProfile/UserProfile";
 import { UserMovies } from "./Movie/UserMovies";
+import { MovieEditor } from "./Movie/MovieEditor";
 
 
 export default function ApplicationViews({ isLoggedIn}) {
@@ -21,6 +22,7 @@ export default function ApplicationViews({ isLoggedIn}) {
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
           <Route path=":movieId" element={<MovieDetails />} />
+          <Route path=":movieId/edit" element={<MovieEditor />} />
           <Route path="MakeMovie" element={<MakeMovie />} />
           <Route path="YourMovies" element={<UserMovies />} />
           <Route path="Profile" element={<UserProfile />} />

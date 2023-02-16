@@ -35,17 +35,41 @@ namespace FilmSpot.Controllers
         }
 
         [HttpGet("UserMovies")]
-        public IActionResult GetById()
+        public IActionResult GetByAllId()
         {
             var user = GetCurrentUserProfile();
             return Ok(_movieRepository.GetUserMovies(user.Id));
         }
 
+        [HttpGet("UserMovie")]
+        public IActionResult GetUserMovieId(int id)
+        {
+            var movie = _movieRepository.GetUserMovie(id);
+            return Ok(movie);
+        }
+
         [HttpPost]
         public IActionResult Post(Movie movie)
         {
+            var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var userProfile = _userProfileRepository.GetByFirebaseUserId(firebaseUserId);
+
+            movie.UserProfileId = userProfile.Id;
+
             _movieRepository.AddMovie(movie);
             return CreatedAtAction("Get", new { id = movie.Id }, movie);
+        }
+
+        [HttpPut("{id}/edit")]
+        public IActionResult Put(int id, Movie movie)
+        {
+            if (id != movie.Id)
+            {
+                return BadRequest();
+            }
+
+            _movieRepository.UpdateMovie(movie);
+            return NoContent();
         }
     }
 }
