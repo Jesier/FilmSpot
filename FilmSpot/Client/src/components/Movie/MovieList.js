@@ -46,7 +46,7 @@ export default function MovieList() {
           />
         </div>
       </form>
-      <div className="MoviesContainer">
+      <div className="d-flex flex-wrap" >
         {movies.map(movie => {
           return <MovieCard movie={movie} key={movie.id} />
 

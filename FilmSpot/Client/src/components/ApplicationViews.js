@@ -8,6 +8,7 @@ import { MovieDetails } from "./Movie/MovieDetails";
 import { UserProfile } from "./UserProfile/UserProfile";
 import { UserMovies } from "./Movie/UserMovies";
 import { MovieEditor } from "./Movie/MovieEditor";
+import { UserMovieDetails } from "./Movie/UserMovieDetails";
 
 
 export default function ApplicationViews({ isLoggedIn}) {
@@ -25,7 +26,8 @@ export default function ApplicationViews({ isLoggedIn}) {
           <Route path=":movieId/edit" element={<MovieEditor />} />
           <Route path="MakeMovie" element={<MakeMovie />} />
           <Route path="YourMovies" element={<UserMovies />} />
-          <Route path="Profile" element={<UserProfile />} />
+          <Route path="YourMovies/:movieId" element={<UserMovieDetails />} />
+          <Route path="Favorites" element={<UserProfile />} />
           <Route path="*" element={<p>Whoops, nothing here...</p>} />
         </Route>
       </Routes>

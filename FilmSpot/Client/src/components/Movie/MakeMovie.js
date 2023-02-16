@@ -11,7 +11,7 @@ export const MakeMovie = () => {
     const [newMovie, setNewMovie] = useState({
         Title: "",
         Info: "",
-        Image: "",
+        Poster: "",
         Trailer: "",
         ReleaseDate: "",
         GenreId: "",
@@ -59,10 +59,10 @@ export const MakeMovie = () => {
             </div>
             <div className="form-group">
                 <label htmlFor="Image">Image</label>
-                <input type="text" className="form-control" value={newMovie.Image} placeholder="Image Link" required onChange={
+                <input type="text" className="form-control" value={newMovie.Poster} placeholder="Image Link" required onChange={
                     (evt) => {
                         const copy = { ...newMovie }
-                        copy.Image = evt.target.value
+                        copy.Poster = evt.target.value
                         setNewMovie(copy)
                     }} />
             </div>
@@ -96,7 +96,7 @@ export const MakeMovie = () => {
                     })}
                 </select>
             </div>
-            <button onClick={(clickEvent) => handleSaveButtonClick(clickEvent)}> yea </button>
+            <button onClick={(clickEvent) => handleSaveButtonClick(clickEvent)}> Submit </button>
         </form>
     </>
 }

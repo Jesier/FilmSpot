@@ -13,13 +13,13 @@ export const Navbar = () => {
         <a className="nav-link" href="/">Home</a>
       </li>
       <li className="nav-item">
-        <a className="nav-link" href="MakeMovie">StoreMovie</a>
+        <a className="nav-link" href="/MakeMovie">StoreMovie</a>
       </li>
       <li className="nav-item">
-        <a className="nav-link" href="YourMovies">YourMovies</a>
+        <a className="nav-link" href="/YourMovies">YourMovies</a>
       </li>
       <li className="nav-item">
-        <a className="nav-link" href="Profile">Profile</a>
+        <a className="nav-link" href="/Favorites">Favorites</a>
       </li>
       <li className="nav-item">
                   <a  className="nav-link" onClick={logout}>Logout</a>

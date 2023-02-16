@@ -22,9 +22,9 @@ export const getUserMovies = () => {
      }).then((res) => res.json()))
 };
 
-export const getUserMovie = () => {
+export const getUserMovie = (id) => {
     return getToken().then((token) => 
-     fetch(`${apiUrl}/UserMovie`, {
+     fetch(`${apiUrl}/${id}`, {
         method: "GET",
         headers: {
             Authorization: `Bearer ${token}`
@@ -59,3 +59,13 @@ export const editMovie = (movie) => {
     })
         .then(res => res.json()))
 }
+
+export const deleteMovie = (id) => {
+    return getToken().then((token) => 
+     fetch(`${apiUrl}/${id}`, {
+        method: "DELETE",
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+     }))
+};

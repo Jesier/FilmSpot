@@ -124,7 +124,7 @@ namespace FilmSpot.Repository
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"Select M.Id, M.Title, M.Info, M.Poster, M.ReleaseDate, M.GenreId, M.UserProfileId,
+                    cmd.CommandText = @"Select M.Id, M.Title, M.Info, M.Trailer, M.Poster, M.ReleaseDate, M.GenreId, M.UserProfileId,
                                         up.Id as UserId                                        
 
                                         FROM Movie M
@@ -141,16 +141,17 @@ namespace FilmSpot.Repository
                         {
                             movie = new Movie()
                             {
-                                Id = reader.GetInt32(reader.GetOrdinal("Id")),
-                                Title = reader.GetString(reader.GetOrdinal("Title")),
-                                Info = reader.GetString(reader.GetOrdinal("Info")),
-                                Poster = reader.GetString(reader.GetOrdinal("Poster")),
-                                ReleaseDate = reader.GetDateTime(reader.GetOrdinal("ReleaseDate")),
-                                GenreId = reader.GetInt32(reader.GetOrdinal("GenreId")),
-                                UserProfileId = reader.GetInt32(reader.GetOrdinal("UserProfileId")),
+                                Id = DbUtils.GetInt(reader, "Id"),
+                                Title = DbUtils.GetString(reader, "Title"),
+                                Info = DbUtils.GetString(reader, "Info"),
+                                Poster = DbUtils.GetString(reader, "Poster"),
+                                Trailer = DbUtils.GetString(reader, "Trailer"),
+                                ReleaseDate = DbUtils.GetDateTime(reader, "ReleaseDate"),
+                                GenreId = DbUtils.GetInt(reader, "GenreId"),
+                                UserProfileId = DbUtils.GetInt(reader, "UserProfileId"),
                                 UserProfile = new UserProfile()
                                 {
-                                    Id = reader.GetInt32(reader.GetOrdinal("UserId"))
+                                    Id = DbUtils.GetInt(reader, "UserId")
                                 }
                             };
                         }

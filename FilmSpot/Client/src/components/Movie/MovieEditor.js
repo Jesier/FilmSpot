@@ -1,22 +1,25 @@
 import { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { editMovie } from "../../modules/movieManager"
 import { getUserMovie } from "../../modules/movieManager"
 import axios from "axios"
+import { deleteMovie } from "../../modules/movieManager"
+
 export const MovieEditor = () => {
 const [movie, setMovie] = useState({
-    Title:"",
-    Info:"",
-    Poster:"",
-    Trailer:"",
-    ReleaseDate:"",
-    GenreId:"",
+    title:"",
+    info:"",
+    poster:"",
+    trailer:"",
+    releaseDate:"",
+    genreId:"",
 })
 const [genres, setGenres] = useState([])
 const navigate = useNavigate()
+const {movieId} = useParams();
 
 useEffect(() => {
-    getUserMovie(movie)
+    getUserMovie(movieId)
     .then((data) => {
         setMovie(data)
     })
@@ -26,8 +29,16 @@ const handleSaveButtonClick = (event) => {
     event.preventDefault()
     editMovie(movie)
         .then(() => {
-            navigate("/")
+            navigate(`/YourMovies`)
         })
+}
+
+const buttonDeleteMovie = (event) => {
+    event.preventDefault()
+    deleteMovie(movie.id)
+    .then(() => {
+        navigate(`/YourMovies`)
+    })
 }
 
 useEffect(() => {
@@ -43,54 +54,54 @@ return <>
         <form>
             <div className="form-group">
                 <label htmlFor="title">Title</label>
-                <input type="title" className="form-control" value={movie.Title} placeholder="Title of film" required onChange={
+                <input type="title" className="form-control" value={movie.title} placeholder="Title of film" required onChange={
                     (evt) => {
                         const copy = { ...movie }
-                        copy.Title = evt.target.value
+                        copy.title = evt.target.value
                         setMovie(copy)
                     }} />
             </div>
             <div className="form-group">
                 <label htmlFor="Info">Info</label>
-                <textarea type="Info" className="form-control" value={movie.Info} required placeholder="Whats the film about" onChange={
+                <textarea type="Info" className="form-control" value={movie.info} required placeholder="Whats the film about" onChange={
                     (evt) => {
                         const copy = { ...movie }
-                        copy.Info = evt.target.value
+                        copy.info = evt.target.value
                         setMovie(copy)
                     }} />
             </div>
             <div className="form-group">
-                <label htmlFor="Image">Image</label>
-                <input type="text" className="form-control" value={movie.Image} placeholder="Image Link" required onChange={
+                <label htmlFor="poster">Image</label>
+                <input type="text" className="form-control" value={movie.poster} placeholder="Image Link" required onChange={
                     (evt) => {
                         const copy = { ...movie }
-                        copy.Image = evt.target.value
+                        copy.poster = evt.target.value
                         setMovie(copy)
                     }} />
             </div>
             <div className="form-group">
                 <label htmlFor="trailer">Trailer</label>
-                <input type="text" className="form-control" value={movie.Trailer} required onChange={
+                <input type="text" className="form-control" value={movie.trailer} required onChange={
                     (evt) => {
                         const copy = { ...movie }
-                        copy.Trailer = evt.target.value
+                        copy.trailer = evt.target.value
                         setMovie(copy)
                     }} />
             </div>
             <div className="form-group">
-                <label htmlFor="ReleaseDate">ReleaseDate</label>
-                <input type="Date" className="form-control" value={movie.ReleaseDate} required onChange={
+                <label htmlFor="releaseDate">ReleaseDate</label>
+                <input type="datetime-local" className="form-control" value={movie.releaseDate} required onChange={
                     (evt) => {
                         const copy = { ...movie }
-                        copy.ReleaseDate = evt.target.value
+                        copy.releaseDate = evt.target.value
                         setMovie(copy)
                     }} />
             </div>
             <div className="form-group">
                 <label htmlFor="GenreId">Genre</label>
-                <select className="form-control" id="FormControlSelect1" onChange={(evt) => {
+                <select className="form-control" value={movie.genreId} id="FormControlSelect1" onChange={(evt) => {
                     const copy = { ...movie }
-                    copy.GenreId = evt.target.value
+                    copy.genreId = evt.target.value
                     setMovie(copy)
                 }} >
                     {genres.map(genre => {
@@ -98,7 +109,8 @@ return <>
                     })}
                 </select>
             </div>
-            <button onClick={(clickEvent) => handleSaveButtonClick(clickEvent)}> yea </button>
+            <button onClick={(event) => handleSaveButtonClick(event)}> Edit </button>
+            <button onClick={(event) => {buttonDeleteMovie(event)}} >Delete</button> 
         </form>
     </>
 }
