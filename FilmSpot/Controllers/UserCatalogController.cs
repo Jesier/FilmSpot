@@ -44,6 +44,7 @@ namespace FilmSpot.Controllers
             var userProfile = _userProfileRepository.GetByFirebaseUserId(firebaseUserId);
 
             favorite.UserProfileId = userProfile.Id;
+
             _userCatalogRepository.AddFavorite(favorite);
             return CreatedAtAction(nameof(Get), new { id = favorite.Id }, favorite);
         }

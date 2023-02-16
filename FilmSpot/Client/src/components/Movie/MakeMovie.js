@@ -9,7 +9,6 @@ export const MakeMovie = () => {
     const [genres, setGenres] = useState([])
     //inital state of a empty movie
     const [newMovie, setNewMovie] = useState({
-        Id: 1,
         Title: "",
         Info: "",
         Image: "",
@@ -35,18 +34,11 @@ export const MakeMovie = () => {
             })
     }
 
+    
+
 
     return <>
         <form>
-        <div className="form-group">
-                <label htmlFor="id">id</label>
-                <input type="id" className="form-control" value={newMovie.Id} placeholder="Title of film" required onChange={
-                    (evt) => {
-                        const copy = { ...newMovie }
-                        copy.Id = evt.target.value
-                        setNewMovie(copy)
-                    }} />
-            </div>
             <div className="form-group">
                 <label htmlFor="title">Title</label>
                 <input type="title" className="form-control" value={newMovie.Title} placeholder="Title of film" required onChange={
