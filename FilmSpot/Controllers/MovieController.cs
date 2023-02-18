@@ -41,7 +41,7 @@ namespace FilmSpot.Controllers
             return Ok(_movieRepository.GetUserMovies(user.Id));
         }
 
-        [HttpGet("UserMovie")]
+        [HttpGet("{id}")]
         public IActionResult GetUserMovieId(int id)
         {
             var movie = _movieRepository.GetUserMovie(id);
@@ -71,5 +71,13 @@ namespace FilmSpot.Controllers
             _movieRepository.UpdateMovie(movie);
             return NoContent();
         }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            _movieRepository.DeleteMovie(id);
+            return NoContent();
+        }
+
     }
 }

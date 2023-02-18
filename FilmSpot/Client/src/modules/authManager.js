@@ -1,7 +1,9 @@
 import firebase from "firebase/app";
 import "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
 const _apiUrl = "/api/userprofile";
+
 
 const _doesUserExist = (firebaseUserId) => {
   return getToken().then((token) =>
@@ -59,6 +61,9 @@ export const login = (email, pw) => {
 
 export const logout = () => {
   firebase.auth().signOut()
+  .then(() => {
+    const navigate = useNavigate()
+    navigate(`/login`)})
 };
 
 

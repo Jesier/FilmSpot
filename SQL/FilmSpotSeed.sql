@@ -3,7 +3,8 @@ Go
 
 set identity_insert [UserProfile] on;
 INSERT INTO "UserProfile" ("Id","FirebaseUserId","Email","FirstName","LastName","IsAdmin") VALUES ('1','5czYrA2F2xVsLZqMsM55bEPIGK83','jesier@test.com','Jesier','Santiago','1'),
-('2','p2cL3zQKXlR8w7kGECitd1k2THk2','santiago@test.com','Billy','Bob','0');
+('2','p2cL3zQKXlR8w7kGECitd1k2THk2','santiago@test.com','Billy','Bob','0'),
+('3','jpSYYCaOocVHbQA4lQbE2y6MNVl2','data@test.com','Data','Man','1');
 set identity_insert [UserProfile] off;
 
 set identity_insert [Genre] on;
@@ -32,5 +33,6 @@ set identity_insert [Movie] on;
 insert into "Movie" ("Id", "Title", "Info", "Poster", "ReleaseDate","GenreId","UserProfileId") Values ('772071','Cuando Sea Joven','70-year-old Malena gets a second chance at life when she magically turns into her 22-year-old self.',
 '/6gIJuFHh5Lj4dNaPG3TzIMl7L68.jpg','2022-09-14','35','1'),
 ('238','The Godfather','Spanning the years 1945 to 1955, a chronicle of the fictional Italian-American Corleone crime family.','/3bhkrj58Vtu7enYsRolD1fZdja1.jpg','1972-03-14','80','2')
+
 set identity_insert [Movie] off ;
 
