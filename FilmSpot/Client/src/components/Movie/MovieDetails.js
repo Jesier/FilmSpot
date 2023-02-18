@@ -1,49 +1,61 @@
 import { useEffect, useState } from "react"
-import { useNavigate, useParams} from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import axios from "axios"
 import { Favorite } from "./Favorite"
-import { me } from "../../modules/authManager"
 import { postUserFavorite } from "../../modules/userCatalogManager"
 
 export const MovieDetails = () => {
-    const [movie, setMovie] = useState({});
-    const {movieId} = useParams();
-    
-   const favorite = {
+  const [movie, setMovie] = useState({});
+  const { movieId } = useParams();
+  const [video,setVideo] = useState({})
+
+  const favorite = {
     movieId: movie.id,
     moviePoster: movie.poster_path,
-    movieTitle:movie.title,
+    movieTitle: movie.title,
     Favorite: true,
     Later: false
-    
-   }
 
-    const apiKey = "efd0ff32160fa99cfcda71cd93209624";
-    
-    useEffect(() => {
-        //fetching the movies individual info from the MovieDB
-        axios.get(`
+  }
+  const imgPath = "https://image.tmdb.org/t/p/w500";
+  const apiKey = "efd0ff32160fa99cfcda71cd93209624";
+  const youtube = "https://www.youtube.com/watch?v="
+  useEffect(() => {
+    //fetching the movies individual info from the MovieDB
+    axios.get(`
         https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}&language=en-US`)
-        .then(res => {
-          setMovie(res.data)
-          
-        })
-      },[])
+      .then(res => {
+        setMovie(res.data)
 
-      const handleFavoriteClick = (event) => {
-        event.preventDefault()
-        postUserFavorite(favorite)
+      })
+  }, [])
 
-    }
+  useEffect(() => {
+  axios.get(`
+  https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${apiKey}&language=en-US`)
+      .then(res => {
+        setVideo(res.data.results)
 
-      return <>
+      })
+  }, [])
+
+  const handleFavoriteClick = (event) => {
+    event.preventDefault()
+    postUserFavorite(favorite)
+
+  }
+
+  return <>
+    <div>
+      <h1>{movie.title}</h1>
+      <img width={"200"} src={imgPath + movie.poster_path}/>
+      <h5>{movie.release_date}</h5>
       <div>
-        {movie.title}
-        {movie.release_date}
         {movie.overview}
-        <button onClick={(clickEvent) => handleFavoriteClick(clickEvent)}>
-        <Favorite/>
-        </button>
       </div>
-      </>
+      <button class="btn btn-outline-danger" onClick={(clickEvent) => handleFavoriteClick(clickEvent)}>
+        <Favorite />
+      </button>
+    </div>
+  </>
 }

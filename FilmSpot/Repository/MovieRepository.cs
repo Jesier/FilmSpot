@@ -176,7 +176,6 @@ namespace FilmSpot.Repository
                                 [Title] = @title,
                                 Info = @info,
                                 Poster = @poster,
-                                Trailer = @trailer,
                                 ReleaseDate = @releaseDate,
                                 GenreId = @genreId
                                 
@@ -185,7 +184,7 @@ namespace FilmSpot.Repository
                     cmd.Parameters.AddWithValue("@title", movie.Title);
                     cmd.Parameters.AddWithValue("@info", movie.Info);
                     cmd.Parameters.AddWithValue("@poster", movie.Poster);
-                    cmd.Parameters.AddWithValue("@trailer", movie.Trailer);
+                   
                     cmd.Parameters.AddWithValue("@releaseDate", movie.ReleaseDate);
                     cmd.Parameters.AddWithValue("@genreId", movie.GenreId);
                     cmd.Parameters.AddWithValue("@id", movie.Id);

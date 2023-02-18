@@ -80,15 +80,6 @@ return <>
                     }} />
             </div>
             <div className="form-group">
-                <label htmlFor="trailer">Trailer</label>
-                <input type="text" className="form-control" value={movie.trailer} required onChange={
-                    (evt) => {
-                        const copy = { ...movie }
-                        copy.trailer = evt.target.value
-                        setMovie(copy)
-                    }} />
-            </div>
-            <div className="form-group">
                 <label htmlFor="releaseDate">ReleaseDate</label>
                 <input type="datetime-local" className="form-control" value={movie.releaseDate} required onChange={
                     (evt) => {

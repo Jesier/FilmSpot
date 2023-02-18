@@ -37,16 +37,17 @@ export default function MovieList() {
   return (
     <>
       <form>
-        <div className="movie_search_bar">
-          <input type="search" placeholder='Search Here' id="movie_search"
-            className="form-control"
-            value={query}
+      <div class="input-group">
+  <div class="form-outline">
+    <input type="search" id="form1" placeholder="Search" class="form-control" value={query}
             onChange={e => setQuery(e.target.value)}
-            onKeyPress={searchMovie}
-          />
-        </div>
+            onKeyPress={searchMovie} />
+    <label class="form-label" for="form1"></label>
+  </div>
+</div>
       </form>
-      <div className="d-flex flex-wrap" >
+      <div className="d-flex flex-wrap justify-content-center
+      " >
         {movies.map(movie => {
           return <MovieCard movie={movie} key={movie.id} />
 
@@ -54,7 +55,7 @@ export default function MovieList() {
       </div>
       <div className="page_buttons">
         <button id="prev_button" className="btn btn-light" onClick={() => handlePageChange(page - 1)}>Prev</button>
-        <button id="next_button" className="btn btn-light" onClick={() => handlePageChange(page + 1)}>Next</button>
+        <button id="next_button" className="btn btn-light " onClick={() => handlePageChange(page + 1)}>Next</button>
       </div>
     </>
   );
