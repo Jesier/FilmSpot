@@ -37,3 +37,12 @@ export const postUserFavorite = (Movie) => {
     });
   };
   
+  export const deleteUserFavorite = (id) => {
+    return getToken().then((token) => 
+     fetch(`${apiUrl}/${id}`, {
+        method: "DELETE",
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+     }))
+};
