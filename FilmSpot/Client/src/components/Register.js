@@ -22,7 +22,7 @@ export default function Register() {
       const userProfile = {
         firstName,
         lastName,
-        email,
+        email
       };
       register(userProfile, password).then(() => navigate("/"));
     }
