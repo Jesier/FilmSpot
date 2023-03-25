@@ -21,7 +21,7 @@ export default function ApplicationViews({ isLoggedIn}) {
             element={isLoggedIn ? <MovieList /> : <Navigate to="/login" />}
           />
           <Route path="login" element={<Login />} />
-          <Route path="register" element={<Register />} />
+          <Route path="login/register" element={<Register />} />
           <Route path=":movieId" element={<MovieDetails />} />
           <Route path=":movieId/edit" element={<MovieEditor />} />
           <Route path="MakeMovie" element={<MakeMovie />} />
