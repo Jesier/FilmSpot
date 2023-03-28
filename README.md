@@ -13,8 +13,15 @@ Right under the nav bar there is the search function, where if you type in what 
 
 Every movie listed is clickable where when you click on a movie it will take you to a page where it will give you the information of *clicked* movie and the ability to favorite it with the *favorite* button
 
+## Adding a Favorite
+
+
 ## Creating a Film
 Users have the capability to create and post new films for their own accounts. This is done by going to StoreFilms on the navbar and by filing out the fields then clicking the submit button to have it stored.
 
 ## Editing a Film
 Users can edit their own film. The user can edit their film by going over to **YourFilms**. Once they are there every movie they have created should have a edit button right under it where they can change what they want by changing whats on the input forms. Once done click the *Save* button.
+
+## Deleting a Film
+From the editing portion above the user will also find the delete button right next to the edit button. If they were to click it it would delete the film out of the database.
+
