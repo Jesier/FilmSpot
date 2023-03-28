@@ -12,3 +12,6 @@ This is where all of the sites movies will be shown so a user can decide which m
 Right under the nav bar there is the search function, where if you type in what ever movie your thinking about, it will choose movies with every keyboard press till you have found the one you want.
 
 Every movie listed is clickable where when you click on a movie it will take you to a page where it will give you the information of *clicked* movie and the ability to favorite it with the *favorite* button
+
+## Creating a Film
+Users have the capability to create and post new films for their own accounts. This is done by going to StoreFilms on the navbar and by filing out the fields then clicking the submit button to have it stored.
