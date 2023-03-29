@@ -33,3 +33,4 @@ I developed FilmSpot as a school project this erd was the planning before the co
 
 ERD
 ![ERD image](https://i.ibb.co/2ZN4z3K/chrome-Oq-Mc-Q4-I5-Xn.png)
+**Note that the review table was included for further development purposes
