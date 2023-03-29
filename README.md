@@ -33,4 +33,3 @@ FilmSpot was developed by me (Jesier Santiago) as a school project
 
 ERD
 ![ERD image](https://ibb.co/L9ChcFn)
-
