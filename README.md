@@ -29,7 +29,7 @@ From the editing portion above the user will also find the delete button right n
 When the user clicks the *Logout* on the navbar, they will no longer be in their account anymore and will be taken to the Login page.
 
 ### How FilmSpot was Developed
-FilmSpot was developed by me (Jesier Santiago) as a school project
+I developed FilmSpot as a school project this erd was the planning before the code.
 
 ERD
 ![ERD image](https://i.ibb.co/2ZN4z3K/chrome-Oq-Mc-Q4-I5-Xn.png)
