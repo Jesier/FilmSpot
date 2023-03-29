@@ -34,3 +34,20 @@ I developed FilmSpot as a school project this erd was the planning before the co
 ERD
 ![ERD image](https://i.ibb.co/2ZN4z3K/chrome-Oq-Mc-Q4-I5-Xn.png)
 **Note that the review table was included for further development purposes
+
+The front end was designed with React and React-router-dom, with bootstrap and css for styling.  The Login and Register components as well as the authManager module were mostly borrowed code from Nashville Software School.
+
+Firebase was used for Authentication, using the borrowed code mentioned above to get it working.
+
+The back end is a Web API developed using ASP.NET in C#. For the database I used SQL Server. ADO.NET was used to communicate with the database.
+
+### How to Install and Run
+You will need to have SQL Server installed to run this application. You will also need to setup your own Firebase project to use with this application as well.
+
+After cloning the repository to your machine, go ahead and run the SQL create script found in FilmSpot/SQL, followed by the seed script.
+
+After setting up your database, you will need to change some files. First, in appsettings.json, make sure your default connection string is set up to connect to your database. Then add your Firebase project ID. Then move insided the client directory and make sure you have a file named .env with the Web API key for your Firebase project.
+
+After this, navigate to the Filmspot/FilmSpot/client directory in your terminal. Then run the command "npm install".
+
+With all of this setup out of the way, run the server, and then run the react app using "npm start".
