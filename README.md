@@ -32,4 +32,4 @@ When the user clicks the *Logout* on the navbar, they will no longer be in their
 FilmSpot was developed by me (Jesier Santiago) as a school project
 
 ERD
-![ERD image](https://imgur.com/a/vhxxj5v)
+![ERD image](https://i.ibb.co/h2K146D/chrome-2c-Loxrme-A1.png)
