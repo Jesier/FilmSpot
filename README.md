@@ -50,4 +50,4 @@ After setting up your database, you will need to change some files. First, in ap
 
 After this, navigate to the Filmspot/FilmSpot/client directory in your terminal. Then run the command "npm install".
 
-With all of this setup out of the way, run the server, and then run the react app using "npm start"..
+With all of this setup out of the way, run the server, and then run the react app using "npm start".
